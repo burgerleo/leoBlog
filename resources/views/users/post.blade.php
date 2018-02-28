@@ -46,6 +46,7 @@ button:focus {
 }
 </style>
 
+<form  enctype="multipart/form-data">
 <div class="container">
     <div class="grid">
         <div class="actions">
@@ -70,7 +71,17 @@ button:focus {
             </div>
         </div>
     </div>
+<button type="submit" class="btn">Save</button>
+
 </div>
+</form>
+
+<form action={{ url('post') }} method="post" enctype="multipart/form-data">
+    {{ csrf_field() }}
+    <label for="">選擇一個PDF</label><br>
+    <input type="file" name="img" id="file"><br>
+<button type="submit">submit</button>
+</form>
 
 <script src="{{ asset('js/croppie.js') }}"></script>
 
@@ -95,7 +106,7 @@ $('#upload').on('change', function () {
     $(".crop").show();
     $(".upload-result").show();
     $('#cut-msg').show();
-    
+
     $('#up-msg').hide();
     readFile(this); 
 });

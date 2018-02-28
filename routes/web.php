@@ -19,6 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/post',function(){
-	return view('users.post');
-});
+Route::resource('/post','PostController');
