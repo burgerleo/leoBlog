@@ -15,6 +15,11 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('title')->comment('標題');;
+            $table->string('body')->comment('內容');;
+            $table->integer('view')->nullable()->default(0)->comment('觀看次數');;
             $table->timestamps();
         });
     }
