@@ -46,8 +46,7 @@ button:focus {
 }
 </style>
 
-<form  enctype="multipart/form-data">
-<div class="container">
+<!-- <form  enctype="multipart/form-data"> -->
     <div class="grid">
         <div class="actions">
             <div class="col-1-2">
@@ -73,15 +72,22 @@ button:focus {
     </div>
 <button type="submit" class="btn">Save</button>
 
-</div>
-</form>
+
+<!-- </form> -->
+
+<img src="{{asset('storage/img/cd3e719db8130c4c8a23cee4b00bf436.png')}}">
+
 
 <form action={{ url('post') }} method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <label for="">選擇一個PDF</label><br>
     <input type="file" name="img" id="file"><br>
+    <div class="url"></div>
 <button type="submit">submit</button>
 </form>
+
+<canvas id="myCanvas" width="200" height="200">
+</canvas>
 
 <script src="{{ asset('js/croppie.js') }}"></script>
 
@@ -140,13 +146,22 @@ function readFile(input)
 function popupResult(result) 
 {
     var html;
+    var url;
     if (result.html) {
         html = result.html;
     }
     if (result.src) {
         html = '<img src="' + result.src + '" />';
+        url = '<input type="hidden" name="url" value="' + result.src + '" />';
     }
     $("#result").html(html);
+    $(".url").html(url);
 }
+
+var c=document.getElementById("myCanvas");
+var cxt=c.getContext("2d");
+var img = new Image()
+img.src="{{ asset('img/cat.jpg') }}";
+cxt.drawImage(img,0,0);
 </script>
 @endsection

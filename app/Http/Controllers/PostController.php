@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\cURL;
+use Storage;
 
 class PostController extends Controller
 {
+
+    public function __construct(cURL $cURL)
+    {
+        $this->curl = $cURL;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +41,31 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->url;
+        list($type, $data) = explode(';', $data);
+        list(, $data)      = explode(',', $data);
+        $data = base64_decode($data);
+        $filename = 'public/img/'.md5(time()).'.png';
+        $destinationPath = public_path().'/img/';
+        // return $destinationPath;
+        // Storage::put($filename, $data, 'img');
+        // return $t;
+        // Storage::put($filename, $data, 'img');
+        Storage::put($filename, $data);
+        return ;
+
        try{
+            $url = $request->url;
+            list($type, $url) = explode(';', $data);
+            list(, $data)      = explode(',', $data);
+            $data = base64_decode($data);
+            return $data;
+            // file_put_contents('image64.png', $data);
+            Storage::put('file.jpg', $data, 'public');
+            return $data;
+            // Storage::put('file.jpg', $png, 'public');
+            // $filetype = $png->getMimeType();
+            return $url;
             $destinationPath = public_path().'/img/';
             $filename = $request->img->getclientoriginalname();
             $filetype = $request->img->getMimeType();
