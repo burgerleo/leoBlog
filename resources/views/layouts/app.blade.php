@@ -17,6 +17,11 @@
     <script src="{{asset('js/app.js') }}"></script>
 </head>
 <body>
+<style type="text/css">
+    .img{
+        height: 50px;
+    }
+</style>
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -39,7 +44,6 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -51,10 +55,16 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                    @if(isset(Auth::user()->userhead->newImg))
+                                        <img src="{{asset('/storage/img/'.Auth::user()->id.'/'.Auth::user()->userhead->newImg)}}" class="img">
+                                    @Endif
+
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">
+                                    <li><a href="{{url('/user/edit')}}">Edit</a>
+                                    </li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

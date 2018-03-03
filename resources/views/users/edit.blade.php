@@ -5,7 +5,7 @@
 <link href="{{ asset('css/demo.css') }}" rel="stylesheet">
 <style type="text/css">
 /*以下可刪*/
-button,
+/*button,
 a.btn {
     background-color: #189094;
     color: white;
@@ -36,64 +36,65 @@ button:focus {
 }
 .actions button {
     margin-right: 5px;
-}
+}*/
 /*以上可刪*/
-.crop{display:none}
+.crop{
+    display:none;
+}
 .up-demo{
     position: relative;
     text-align: center;
     top: 50px;
 }
+.save{
+    display:none;
+}
+/*.upload-demo .upload-demo-wrap
+.upload-demo 
+.upload-demo.ready .upload-msg */
+
+.upload-result{
+    display: none;
+}
+#cut-msg{
+    display: none;
+}
 </style>
 
-<!-- <form  enctype="multipart/form-data"> -->
-    <div class="grid">
-        <div class="actions">
-            <div class="col-1-2">
-                <button class="btn file-btn">
-                    <span>上傳</span>
-                    <input type="file" id="upload" value="Choose a file" />
-                    <button class="btn upload-result">裁剪</button>
-                    <div class="upload-msg" id='cut-msg'>
-                        Cut in here
-                    </div>
-                    <div id="result" class="up-demo"></div>
-                </button>
-            </div> 
-            <div class="col-1-2">
-                <div class="upload-msg" id='up-msg'>
-                    Upload a file to start cropping
+<form action={{ url('head') }} method="post" enctype="multipart/form-data">
+    {{ csrf_field() }}
+    <div class="actions">
+        <div class="col-1-2{{ $errors->has('oldImg') ? ' has-error' : '' }}">
+            <button class="btn file-btn">
+                <span>上傳</span>
+
+                <input type="file" id="upload" name="oldImg" value="Choose a file" />
+                <button type="button" class="btn upload-result">裁剪</button>
+                <div class="upload-msg" id='cut-msg'>
+                    Cut in here
                 </div>
-                <div class="crop">
-                    <div id="upload-demo"></div>
-                </div>
+                <div id="result" class="up-demo"></div>
+            </button>
+            @if ($errors->has('oldImg'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('oldImg') }}</strong>
+                </span>
+            @endif
+        </div> 
+        <div class="col-1-2">
+            <div class="upload-msg" id='up-msg'>
+                Upload a file to start cropping
+            </div>
+            <div class="crop">
+                <div id="upload-demo"></div>
             </div>
         </div>
     </div>
-<button type="submit" class="btn">Save</button>
-
-
-<!-- </form> -->
-
-<img src="{{asset('storage/img/cd3e719db8130c4c8a23cee4b00bf436.png')}}">
-
-
-<form action={{ url('post') }} method="post" enctype="multipart/form-data">
-    {{ csrf_field() }}
-    <label for="">選擇一個PDF</label><br>
-    <input type="file" name="img" id="file"><br>
-    <div class="url"></div>
-<button type="submit">submit</button>
+    <button type="submit" class="btn save" >Save</button>
 </form>
-
-<canvas id="myCanvas" width="200" height="200">
-</canvas>
-
 <script src="{{ asset('js/croppie.js') }}"></script>
 
 <script type="text/javascript">
-$(".upload-result").hide();
-$('#cut-msg').hide();
 
 var $uploadCrop;
 
@@ -112,8 +113,9 @@ $('#upload').on('change', function () {
     $(".crop").show();
     $(".upload-result").show();
     $('#cut-msg').show();
-
     $('#up-msg').hide();
+    $('.help-block').hide();
+    $('#result').empty();
     readFile(this); 
 });
 $('.upload-result').on('click', function (ev) {
@@ -127,9 +129,10 @@ $('.upload-result').on('click', function (ev) {
 
 function readFile(input) 
 {
+    console.log(input.files[0]);
+
     if (input.files && input.files[0]) {
         var reader = new FileReader();
-        
         reader.onload = function (e) {
             $uploadCrop.croppie('bind', {
                 url: e.target.result
@@ -139,29 +142,28 @@ function readFile(input)
         reader.readAsDataURL(input.files[0]);
     }
     else {
-        alert("Sorry - you're browser doesn't support the FileReader API");
+        alert("Plase select Img");
+        $(".crop").hide();
+        $("#up-msg").show();
+        $('.save').hide();
+        $(".upload-result").hide();
+
+        // alert("Sorry - you're browser doesn't support the FileReader API");
     }
 }
     
 function popupResult(result) 
 {
     var html;
-    var url;
     if (result.html) {
         html = result.html;
     }
     if (result.src) {
         html = '<img src="' + result.src + '" />';
-        url = '<input type="hidden" name="url" value="' + result.src + '" />';
+        html += '<input type="hidden" name="newImg" value="' + result.src + '" />';
     }
     $("#result").html(html);
-    $(".url").html(url);
+    $('.save').show();
 }
-
-var c=document.getElementById("myCanvas");
-var cxt=c.getContext("2d");
-var img = new Image()
-img.src="{{ asset('img/cat.jpg') }}";
-cxt.drawImage(img,0,0);
 </script>
 @endsection

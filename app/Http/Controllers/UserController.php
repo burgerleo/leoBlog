@@ -3,19 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\cURL;
-use App\post;
-use App\userhead;
-use Storage;
-use Auth;
+use App\User;
 
-class PostController extends Controller
+
+class UserController extends Controller
 {
-
-    public function __construct(cURL $cURL)
-    {
-        $this->curl = $cURL;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +15,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts.index');
+        //
+        $user = User::find(1)->userhead;
+        return $user;
     }
 
     /**
@@ -44,7 +38,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-       
+        //
     }
 
     /**
@@ -64,9 +58,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        return view('users.edit');
     }
 
     /**
