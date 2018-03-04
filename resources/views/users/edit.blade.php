@@ -61,7 +61,7 @@ button:focus {
 }
 </style>
 
-<form action={{ url('head') }} method="post" enctype="multipart/form-data">
+<form action={{url('head')}} method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="actions">
         <div class="col-1-2{{ $errors->has('oldImg') ? ' has-error' : '' }}">
