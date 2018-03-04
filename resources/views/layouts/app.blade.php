@@ -11,10 +11,10 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <!-- Scripts -->
     <script src='{{asset("/js/jquery-3.2.1.min.js")}}'></script>
-    <script src="{{asset('js/app.js') }}"></script>
+    <script src="{{asset('js/bootstrap.min.js') }}"></script>
 </head>
 <body>
 <style type="text/css">
