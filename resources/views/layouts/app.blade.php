@@ -18,7 +18,7 @@
 </head>
 <body>
 <style type="text/css">
-    .img{
+    .head-img{
         height: 50px;
     }
 </style>
@@ -56,7 +56,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     @if(isset(Auth::user()->userhead->newImg))
-                                        <img src="{{asset('/storage/img/'.Auth::user()->id.'/'.Auth::user()->userhead->newImg)}}" class="img">
+                                        <img src="{{asset('/storage/img/'.Auth::user()->id.'/'.Auth::user()->userhead->newImg)}}" class="head-img">
                                     @Endif
 
                                     {{ Auth::user()->name }} <span class="caret"></span>

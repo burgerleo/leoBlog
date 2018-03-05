@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\cURL;
 use App\post;
-use App\userhead;
 use Storage;
 use Auth;
 
@@ -44,8 +43,23 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // return 123;
-        return $request;
+        // return $request;
+        $rules = [
+            'title' => 'required|max:5',
+        ];
+        $messages = [
+            'title.required' =>'要有標題!!!',
+            // 'tittle.max' =>'請再上傳最大1mb的檔案',
+        ];
+        $this->validate($request,$rules,$messages);
+        $post = $request->all();
+        // $body = $request->body;
+        // $title = $request->title;
+        // $user_id = $request->user_id;
+        // $post = compact('user_id','body','title');
+        post::create($post);
+        return redirect('/');
+
     }
 
     /**

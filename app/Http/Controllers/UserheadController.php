@@ -14,12 +14,11 @@ class UserheadController extends Controller
 	public function store(Request $request)
     {
     	$rules = [
-            'oldImg' => 'required|max:1024|min:20',
+            'oldImg' => 'required|max:1024',
         ];
         $messages = [
             'oldImg.required' =>'請再上傳照片',
             'oldImg.max' =>'請再上傳最大1mb的檔案',
-            'oldImg.min' =>'請再上傳最小20kb的檔案',
         ];
         $this->validate($request,$rules,$messages);
 
@@ -36,7 +35,7 @@ class UserheadController extends Controller
         $oldImg = md5($filename. time()).'.'.$filetype;
         $request->file('oldImg')->move($destinationPath,$oldImg);
         userhead::updateOrCreate(
-    	 	['id' => $user_id],compact('oldImg','newImg')
+    	 	['id' => $user_id],compact('user_id','oldImg','newImg')
         );
         return redirect('/');
     }
