@@ -22,7 +22,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts.index');
+        $title = '文章頁面';
+        $post = post::all();
+        $data = compact('title','post'); 
+        return view('posts.index',$data);
     }
 
     /**
