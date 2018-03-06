@@ -12,16 +12,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/leo.css') }}" rel="stylesheet">
     <!-- Scripts -->
     <script src='{{asset("/js/jquery-3.2.1.min.js")}}'></script>
     <script src="{{asset('js/bootstrap.min.js') }}"></script>
 </head>
 <body>
-<style type="text/css">
-    .head-img{
-        height: 50px;
-    }
-</style>
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">

@@ -48,7 +48,7 @@ class PostController extends Controller
     {
         // return $request;
         $rules = [
-            'title' => 'required|max:15',
+            'title' => 'required|max:150',
         ];
         $messages = [
             'title.required' =>'要有標題!!!',

@@ -21,9 +21,12 @@ Auth::routes();
 
 Route::resource('/post','PostController');
 Route::post('/head','UserheadController@store');
-Route::get('/user/edit','UserController@edit');
 
 Route::get('/', 'PostController@index');
 
 
 Route::get('/test','UserController@index');
+Route::group(['middleware'=>['auth']],function(){
+	Route::get('/user/edit','UserController@edit');
+
+});

@@ -5,14 +5,12 @@
     <script src="{{asset('/vendor/unisharp/laravel-ckeditor/adapters/jquery.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{asset('/vendor/unisharp/laravel-ckeditor/contents.css')}}">
 <style type="text/css">
-    .control{
-        margin-top: 20px;
-    }
+
 </style>
 <form action="{{url('post')}}" method="post">
     {{ csrf_field() }}    
     <div class="text">
-    <input type="hidden" name="user_id" value="{{auth::user()->id}}" required autofocus>
+    <input type="hidden" name="user_id" value="{{auth::user()->id}}">
     <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
     <label for="title" class="control-label">標題</label>
         <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
@@ -35,15 +33,12 @@
     </textarea>
     </div>
     <ul class="control list-inline"> 
-        <!-- <li><button type="button" id="preview" class="btn btn-info">預覽</button></li>  -->
         <button type="button" id="preview" class="btn btn-info" data-toggle="modal" data-target="#myModal">
 		  預覽
 		</button>
         <li><button type="submit" class="btn btn-success">儲存</button></li> 
     </ul>
 </form>
-<!-- Button trigger modal -->
-
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
