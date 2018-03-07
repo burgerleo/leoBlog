@@ -23,7 +23,7 @@ class PostController extends Controller
     public function index()
     {
         $title = '文章頁面';
-        $post = post::all();
+        $post = post::select('title', 'view','created_at','updated_at')->get();
         $data = compact('title','post'); 
         return view('posts.index',$data);
     }
