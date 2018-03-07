@@ -10,19 +10,18 @@
 <br>
 
 @foreach($post as $item)
-<!-- <div>
-	<label class="control-label">{{$item->title}}</label>
-</div> -->
-        <!-- <li>{{$item->title}}</li>  -->
-        <!-- <li class="right">{{$item->view}}</li>  -->
-<div class="col-sm-10">{{$item->title}}</div>
-<div class="col-sm-2">{{$item->view}}</div>
-<!-- {!! $item->body !!} -->
+<div class="col-sm-12">
+	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" data-whatever="{{$item->id}}">
+	  	{{$item->title}}
+	</button>
+</div>
+
 @endforeach
 
-
+<br>
+<br>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" data-whatever="@mdo">
   	Launch demo modal
 </button>
 
@@ -36,6 +35,10 @@
       </div>
       <div class="modal-body">
         body
+        	<div class="form-group">
+	            <label for="recipient-name" class="control-label">Recipient:</label>
+	            <input type="text" class="form-control" id="recipient-name">
+         	 </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -45,4 +48,44 @@
   </div>
 </div>
 
+<script type="text/javascript">
+var body;
+	
+$('#myModal').on('show.bs.modal', function (event) {
+	console.log(event.relatedTarget);
+	var button = $(event.relatedTarget)  
+	var id = button.data('whatever')  
+	getbody(id);
+	// console.log(body);
+	var modal = $(this)	
+	// modal.find('.modal-title').text('New message to ' + recipient)
+	// modal.find('.modal-body input').val(recipient)
+	console.log(body);
+	$('.modal-body').html(body);
+
+})
+
+function getbody(id)
+{
+	console.log(id);
+	$.ajax({
+		url: "{{url('/api/getArticle')}}/"+id,
+		dataType: 'json',
+		type:'get',
+		success: function(data) {
+			// console.log(data);
+
+			body = data.body;
+			console.log(body);
+			$('.modal-body').html(body);
+
+			if (!data) {
+				alert('資料有誤更新失敗');
+			}
+		},error:function(request,error){
+            alert(error + " : " + request.responseText);     
+		}
+	});
+}
+</script>
 @endsection
