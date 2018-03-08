@@ -3,7 +3,7 @@
 @section('content')
     <script src="{{asset('/vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
     <script src="{{asset('/vendor/unisharp/laravel-ckeditor/adapters/jquery.js')}}"></script>
-    <link rel="stylesheet" type="text/css" href="{{asset('/vendor/unisharp/laravel-ckeditor/contents.css')}}">
+    <!-- <link rel="stylesheet" type="text/css" href="{{asset('/vendor/unisharp/laravel-ckeditor/contents.css')}}"> -->
 <style type="text/css">
 
 </style>

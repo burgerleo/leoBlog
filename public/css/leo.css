@@ -1,7 +1,7 @@
-body{
+/*body{
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     font-size: 14px !important;
-    /*line-height: 1.42857143 !important;*/
+    line-height: 1.42857143 !important;
     color: #333 !important;
     background-color: #fff !important;
     margin:0 !important;
@@ -10,7 +10,7 @@ img{
     padding: 0px !important;
     margin: 0px !important;
     outline: 0px solid #0782C1 !important;
-}
+}*/
 .head-img{
     height: 50px;
 }
